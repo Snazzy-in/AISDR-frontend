@@ -1,101 +1,313 @@
-import Image from "next/image";
+"use client"
 
-export default function Home() {
+import Link from "next/link"
+import Image from "next/image"
+import { Button } from "@/components/ui/button"
+import { ArrowRight, Bot, Rocket, Target, Zap, BarChart2, Mail } from "lucide-react"
+
+export default function LandingPage() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <div className="flex min-h-screen flex-col">
+      {/* Navigation */}
+      <header className="px-4 lg:px-8 h-14 flex items-center border-b">
+        <div className="flex w-full max-w-7xl mx-auto justify-between items-center">
+          <div className="flex items-center gap-2">
+            <Rocket className="h-6 w-6 text-purple-600" />
+            <span className="font-bold text-xl">RocketSDR</span>
+          </div>
+          <nav className="hidden md:flex items-center gap-6">
+            <Link href="#features" className="text-sm font-medium hover:text-purple-600">Features</Link>
+            <Link href="#pricing" className="text-sm font-medium hover:text-purple-600">Pricing</Link>
+            <Link href="#testimonials" className="text-sm font-medium hover:text-purple-600">Testimonials</Link>
+          </nav>
+          <div className="flex items-center gap-4">
+            <Link href="/login">
+              <Button variant="ghost">Log in</Button>
+            </Link>
+            <Link href="/signup">
+              <Button>Get Started</Button>
+            </Link>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+      </header>
+
+      {/* Hero Section */}
+      <section className="px-4 lg:px-8 py-20 md:py-28 bg-gradient-to-b from-purple-50 to-white dark:from-gray-900 dark:to-background">
+        <div className="max-w-7xl mx-auto text-center">
+          <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6">
+            Your AI-Powered Sales Development
+            <span className="text-purple-600"> Co-Pilot</span>
+          </h1>
+          <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
+            Automate your outreach, engage prospects with personalized conversations, and close more deals with AI-powered intelligence.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button size="lg" className="text-lg">
+              Start Free Trial
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Button>
+            <Button size="lg" variant="outline" className="text-lg">
+              Watch Demo
+            </Button>
+          </div>
+          <div className="mt-12 flex flex-col items-center gap-4">
+            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+              <span>Backed by</span>
+              <Image
+                src="/yc-logo.png"
+                alt="Y Combinator"
+                width={20}
+                height={20}
+                className="dark:invert"
+              />
+              <span className="font-semibold">Y Combinator</span>
+            </div>
+            <div className="text-sm text-muted-foreground">
+              Trusted by 1000+ companies worldwide
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section id="features" className="px-4 lg:px-8 py-20">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold mb-4">Why Choose RocketSDR?</h2>
+            <p className="text-lg text-muted-foreground">
+              Everything you need to supercharge your sales development process
+            </p>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              {
+                title: "AI-Powered Personalization",
+                description: "Generate highly personalized outreach messages that resonate with your prospects.",
+                icon: Bot
+              },
+              {
+                title: "Smart Lead Targeting",
+                description: "Identify and prioritize your most promising leads with AI-driven insights.",
+                icon: Target
+              },
+              {
+                title: "Automated Campaigns",
+                description: "Set up and manage multi-touch campaigns that run on autopilot.",
+                icon: Zap
+              },
+              {
+                title: "Advanced Analytics",
+                description: "Track performance and optimize your outreach with detailed analytics.",
+                icon: BarChart2
+              },
+              {
+                title: "Multi-Channel Outreach",
+                description: "Engage prospects across email, LinkedIn, and other channels.",
+                icon: Mail
+              },
+              {
+                title: "CRM Integration",
+                description: "Seamlessly sync with your existing CRM and sales tools.",
+                icon: Rocket
+              }
+            ].map((feature, index) => (
+              <div key={index} className="p-6 border rounded-lg">
+                <feature.icon className="h-12 w-12 text-purple-600 mb-4" />
+                <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
+                <p className="text-muted-foreground">{feature.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Pricing Section */}
+      <section id="pricing" className="px-4 lg:px-8 py-20 bg-gray-50 dark:bg-gray-900">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold mb-4">Simple, Transparent Pricing</h2>
+            <p className="text-lg text-muted-foreground">
+              Choose the plan that's right for your business
+            </p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              {
+                name: "Starter",
+                price: "$99",
+                description: "Perfect for small teams getting started",
+                features: [
+                  "Up to 1,000 leads",
+                  "Basic AI personalization",
+                  "Email campaigns",
+                  "Basic analytics",
+                  "Email support"
+                ]
+              },
+              {
+                name: "Professional",
+                price: "$199",
+                description: "For growing teams that need more power",
+                features: [
+                  "Up to 5,000 leads",
+                  "Advanced AI personalization",
+                  "Multi-channel campaigns",
+                  "Advanced analytics",
+                  "Priority support",
+                  "CRM integration"
+                ]
+              },
+              {
+                name: "Enterprise",
+                price: "Custom",
+                description: "For large teams with custom needs",
+                features: [
+                  "Unlimited leads",
+                  "Custom AI models",
+                  "Advanced integrations",
+                  "Custom analytics",
+                  "Dedicated support",
+                  "API access"
+                ]
+              }
+            ].map((plan, index) => (
+              <div key={index} className={`p-8 border rounded-lg ${
+                index === 1 ? "border-purple-600 ring-1 ring-purple-600" : ""
+              }`}>
+                <h3 className="text-2xl font-bold mb-2">{plan.name}</h3>
+                <div className="text-3xl font-bold mb-2">
+                  {plan.price}
+                  {plan.price !== "Custom" && <span className="text-lg font-normal">/month</span>}
+                </div>
+                <p className="text-muted-foreground mb-6">{plan.description}</p>
+                <Button className="w-full mb-6" variant={index === 1 ? "default" : "outline"}>
+                  Get Started
+                </Button>
+                <ul className="space-y-3">
+                  {plan.features.map((feature, featureIndex) => (
+                    <li key={featureIndex} className="flex items-center">
+                      <svg
+                        className="h-4 w-4 text-green-500 mr-3"
+                        fill="none"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path d="M5 13l4 4L19 7" />
+                      </svg>
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section id="testimonials" className="px-4 lg:px-8 py-20">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold mb-4">What Our Customers Say</h2>
+            <p className="text-lg text-muted-foreground">
+              Don't just take our word for it
+            </p>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              {
+                quote: "RocketSDR has transformed our sales development process. The AI personalization is incredible!",
+                author: "Sarah Johnson",
+                role: "VP of Sales, TechCorp"
+              },
+              {
+                quote: "We've seen a 3x increase in response rates since switching to RocketSDR. The ROI is amazing.",
+                author: "Michael Chen",
+                role: "SDR Manager, GrowthCo"
+              },
+              {
+                quote: "The automation capabilities have saved our team countless hours. It's like having an extra SDR!",
+                author: "Emily Rodriguez",
+                role: "Sales Director, ScaleUp Inc"
+              }
+            ].map((testimonial, index) => (
+              <div key={index} className="p-6 border rounded-lg">
+                <p className="text-lg mb-4">"{testimonial.quote}"</p>
+                <div>
+                  <p className="font-semibold">{testimonial.author}</p>
+                  <p className="text-sm text-muted-foreground">{testimonial.role}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="px-4 lg:px-8 py-20 bg-purple-600 text-white">
+        <div className="max-w-7xl mx-auto text-center">
+          <h2 className="text-3xl font-bold mb-4">Ready to Supercharge Your Sales?</h2>
+          <p className="text-xl mb-8 text-purple-100">
+            Start your free trial today. No credit card required.
+          </p>
+          <Button size="lg" variant="secondary" className="text-purple-600">
+            Get Started Now
+            <ArrowRight className="ml-2 h-5 w-5" />
+          </Button>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="px-4 lg:px-8 py-12 border-t">
+        <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div>
+            <h4 className="font-semibold mb-4">Product</h4>
+            <ul className="space-y-2">
+              <li><Link href="#" className="text-sm text-muted-foreground hover:text-foreground">Features</Link></li>
+              <li><Link href="#" className="text-sm text-muted-foreground hover:text-foreground">Pricing</Link></li>
+              <li><Link href="#" className="text-sm text-muted-foreground hover:text-foreground">Security</Link></li>
+            </ul>
+          </div>
+          <div>
+            <h4 className="font-semibold mb-4">Company</h4>
+            <ul className="space-y-2">
+              <li><Link href="#" className="text-sm text-muted-foreground hover:text-foreground">About</Link></li>
+              <li><Link href="#" className="text-sm text-muted-foreground hover:text-foreground">Blog</Link></li>
+              <li><Link href="#" className="text-sm text-muted-foreground hover:text-foreground">Careers</Link></li>
+            </ul>
+          </div>
+          <div>
+            <h4 className="font-semibold mb-4">Resources</h4>
+            <ul className="space-y-2">
+              <li><Link href="#" className="text-sm text-muted-foreground hover:text-foreground">Documentation</Link></li>
+              <li><Link href="#" className="text-sm text-muted-foreground hover:text-foreground">Help Center</Link></li>
+              <li><Link href="#" className="text-sm text-muted-foreground hover:text-foreground">API</Link></li>
+            </ul>
+          </div>
+          <div>
+            <h4 className="font-semibold mb-4">Legal</h4>
+            <ul className="space-y-2">
+              <li><Link href="#" className="text-sm text-muted-foreground hover:text-foreground">Privacy</Link></li>
+              <li><Link href="#" className="text-sm text-muted-foreground hover:text-foreground">Terms</Link></li>
+              <li><Link href="#" className="text-sm text-muted-foreground hover:text-foreground">Cookie Policy</Link></li>
+            </ul>
+          </div>
+        </div>
+        <div className="max-w-7xl mx-auto mt-12 pt-8 border-t">
+          <div className="flex justify-between items-center">
+            <div className="flex items-center gap-2">
+              <Rocket className="h-5 w-5 text-purple-600" />
+              <span className="font-semibold">RocketSDR</span>
+            </div>
+            <p className="text-sm text-muted-foreground">
+              © 2024 RocketSDR. All rights reserved.
+            </p>
+          </div>
+        </div>
       </footer>
     </div>
-  );
+  )
 }
