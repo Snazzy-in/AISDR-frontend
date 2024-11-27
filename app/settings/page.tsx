@@ -49,7 +49,7 @@ export default function SettingsPage() {
 
   return (
     <DashboardLayout>
-      <div className="flex-1 space-y-8 p-8 pt-6">
+      <div className="flex-1 space-y-6 p-4 sm:p-8 sm:pt-6">
         <SettingsHeader
           title="Settings"
           description="Manage your preferences, integrations, and account settings."
@@ -58,12 +58,11 @@ export default function SettingsPage() {
           onCancel={handleCancel}
         />
 
-        <div className="flex gap-8">
-          {/* Settings Navigation - Fixed width, sticky */}
-          <div className="w-64 flex-shrink-0">
-            <div className="sticky top-8">
+        <div className="flex flex-col gap-4 lg:flex-row lg:gap-8">
+          <aside className="w-full lg:w-64 flex-none">
+            <div className="lg:sticky lg:top-8">
               <Card>
-                <CardContent className="p-6">
+                <CardContent className="p-4">
                   <SettingsNav
                     activeSection={activeSection}
                     onSectionChange={setActiveSection}
@@ -71,10 +70,9 @@ export default function SettingsPage() {
                 </CardContent>
               </Card>
             </div>
-          </div>
+          </aside>
 
-          {/* Main Content Area - Flexible width */}
-          <div className="flex-1 max-w-4xl">
+          <div className="flex-1 min-w-0">
             {renderSection()}
           </div>
         </div>

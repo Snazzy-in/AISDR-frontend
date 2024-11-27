@@ -13,7 +13,7 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { Badge } from "@/components/ui/badge"
-import { Search, Download, Trash2, MoreHorizontal, Filter } from 'lucide-react'
+import { Search, Download, Trash2, MoreHorizontal, Filter, Upload } from 'lucide-react'
 import Link from "next/link"
 import {
   DropdownMenu,
@@ -67,8 +67,14 @@ export default function LeadsPage() {
       <div className="flex-1 flex flex-col overflow-auto">
         <div className="flex-1 space-y-4 p-8 pt-6">
           <div className="flex items-center justify-between space-y-2">
-            <h2 className="text-3xl font-bold tracking-tight">Leads (19651)</h2>
+            <h2 className="text-3xl font-bold tracking-tight">All Leads</h2>
             <div className="flex items-center space-x-2">
+              <Button asChild>
+                <Link href="/leads/import">
+                  <Upload className="mr-2 h-4 w-4" />
+                  Import Leads
+                </Link>
+              </Button>
               <Dialog>
                 <DialogTrigger asChild>
                   <Button variant="outline" size="sm">

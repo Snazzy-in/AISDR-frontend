@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { LayoutDashboard, Users, Megaphone, BarChart2, Settings, Rocket, ChevronLeft, ChevronRight } from 'lucide-react'
+import { LayoutDashboard, Users, Megaphone, BarChart2, Settings, Rocket, ChevronLeft, ChevronRight, UsersRound } from 'lucide-react'
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { useState, useEffect } from "react"
@@ -10,18 +10,31 @@ import { useState, useEffect } from "react"
 const sidebarItems = [
   { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
   { name: "Campaigns", href: "/campaigns", icon: Megaphone },
-  { name: "Leads", href: "/leads", icon: Users },
   { name: "Analytics", href: "/analytics", icon: BarChart2 },
   { name: "Settings", href: "/settings", icon: Settings },
 ]
+
+const leadsAndAudiences = {
+  title: "Leads & Audiences",
+  items: [
+    {
+      name: "All Leads",
+      href: "/leads",
+      icon: Users,
+    },
+    {
+      name: "Audiences",
+      href: "/audiences",
+      icon: UsersRound,
+    },
+  ],
+}
 
 export default function Sidebar() {
   const pathname = usePathname()
   const [collapsed, setCollapsed] = useState(() => {
     if (typeof window !== 'undefined') {
-      // Check if mobile first
       if (window.innerWidth < 768) return true
-      // Then check localStorage
       const saved = localStorage.getItem('sidebarCollapsed')
       return saved ? JSON.parse(saved) : false
     }
@@ -35,13 +48,8 @@ export default function Sidebar() {
       }
     }
 
-    // Initial check
     handleResize()
-
-    // Add event listener
     window.addEventListener('resize', handleResize)
-
-    // Cleanup
     return () => window.removeEventListener('resize', handleResize)
   }, [])
 
@@ -67,10 +75,40 @@ export default function Sidebar() {
 
         <div className="flex-1 overflow-auto py-2">
           <nav className={cn(
-            "grid items-start px-4 text-sm font-medium",
+            "grid items-start px-4 text-sm font-medium gap-1",
             collapsed && "px-2"
           )}>
+            {/* Main navigation items */}
             {sidebarItems.map((item) => (
+              <Button
+                key={item.name}
+                asChild
+                variant={pathname === item.href ? "secondary" : "ghost"}
+                className={cn(
+                  "justify-start",
+                  collapsed ? "h-12 w-12 p-0" : "w-full"
+                )}
+              >
+                <Link href={item.href} className={cn(
+                  "flex items-center",
+                  collapsed && "justify-center"
+                )}>
+                  <item.icon className={cn(
+                    "h-4 w-4",
+                    !collapsed && "mr-2"
+                  )} />
+                  {!collapsed && item.name}
+                </Link>
+              </Button>
+            ))}
+
+            {/* Leads & Audiences section */}
+            {!collapsed && (
+              <div className="mt-4 mb-2 px-2 text-xs font-semibold text-muted-foreground">
+                {leadsAndAudiences.title}
+              </div>
+            )}
+            {leadsAndAudiences.items.map((item) => (
               <Button
                 key={item.name}
                 asChild
