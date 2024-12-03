@@ -4,6 +4,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, Bot, Rocket, Target, Zap, BarChart2, Mail } from "lucide-react"
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 
 export default function LandingPage() {
   return (
@@ -243,6 +244,73 @@ export default function LandingPage() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="px-4 lg:px-8 py-20 bg-gray-50 dark:bg-gray-900">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold mb-4">Frequently Asked Questions</h2>
+            <p className="text-lg text-muted-foreground">
+              Everything you need to know about RocketSDR
+            </p>
+          </div>
+          <Accordion type="single" collapsible className="w-full space-y-4">
+            <AccordionItem value="item-1" className="bg-background rounded-lg border px-6">
+              <AccordionTrigger className="text-left">
+                What is RocketSDR and how does it work?
+              </AccordionTrigger>
+              <AccordionContent>
+                RocketSDR is an AI-powered sales development platform that helps teams automate and personalize their outreach. 
+                It uses advanced AI to generate personalized messages, identify promising leads, and manage multi-channel campaigns, 
+                all while integrating seamlessly with your existing tools.
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem value="item-2" className="bg-background rounded-lg border px-6">
+              <AccordionTrigger className="text-left">
+                How does the AI personalization work?
+              </AccordionTrigger>
+              <AccordionContent>
+                Our AI analyzes your prospect's profile, company information, and online presence to generate highly personalized 
+                messages that resonate with their specific needs and interests. The AI continuously learns from response rates 
+                and engagement data to improve its personalization over time.
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem value="item-3" className="bg-background rounded-lg border px-6">
+              <AccordionTrigger className="text-left">
+                Can I integrate RocketSDR with my existing CRM?
+              </AccordionTrigger>
+              <AccordionContent>
+                Yes! RocketSDR integrates with all major CRM platforms including Salesforce, HubSpot, and Pipedrive. 
+                Our API and native integrations ensure smooth data synchronization and workflow automation between your 
+                existing tools and RocketSDR.
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem value="item-4" className="bg-background rounded-lg border px-6">
+              <AccordionTrigger className="text-left">
+                What kind of support do you offer?
+              </AccordionTrigger>
+              <AccordionContent>
+                We offer different levels of support based on your plan. All customers get access to our comprehensive 
+                documentation and email support. Professional and Enterprise plans include priority support with faster 
+                response times, and Enterprise customers get a dedicated customer success manager.
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem value="item-5" className="bg-background rounded-lg border px-6">
+              <AccordionTrigger className="text-left">
+                Is there a free trial available?
+              </AccordionTrigger>
+              <AccordionContent>
+                Yes! We offer a 14-day free trial on all our plans. During the trial, you'll have access to all features 
+                of your chosen plan, allowing you to fully experience how RocketSDR can transform your sales development process.
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
         </div>
       </section>
 

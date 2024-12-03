@@ -2,33 +2,60 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { LayoutDashboard, Users, Megaphone, BarChart2, Settings, Rocket, ChevronLeft, ChevronRight, UsersRound } from 'lucide-react'
+import { LayoutDashboard, Users, Megaphone, BarChart2, Settings, Rocket, ChevronLeft, ChevronRight, UsersRound, Package, UserCircle, FlaskConical } from 'lucide-react'
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 import { useState, useEffect } from "react"
 
 const sidebarItems = [
   { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
   { name: "Campaigns", href: "/campaigns", icon: Megaphone },
+  { 
+    name: "Leads",
+    icon: Users,
+    items: [
+      {
+        name: "All Leads",
+        href: "/leads",
+        icon: Users,
+      },
+      {
+        name: "Audiences",
+        href: "/audiences",
+        icon: UsersRound,
+      },
+    ],
+  },
+  {
+    name: "Sales Assets",
+    icon: Rocket,
+    items: [
+      {
+        name: "Products",
+        href: "/sales-assets/products",
+        icon: Package,
+      },
+      {
+        name: "Personas",
+        href: "/sales-assets/personas",
+        icon: UserCircle,
+      },
+      {
+        name: "RocketLab",
+        href: "/sales-assets/rocketlab",
+        icon: FlaskConical,
+      },
+    ],
+  },
   { name: "Analytics", href: "/analytics", icon: BarChart2 },
   { name: "Settings", href: "/settings", icon: Settings },
 ]
-
-const leadsAndAudiences = {
-  title: "Leads & Audiences",
-  items: [
-    {
-      name: "All Leads",
-      href: "/leads",
-      icon: Users,
-    },
-    {
-      name: "Audiences",
-      href: "/audiences",
-      icon: UsersRound,
-    },
-  ],
-}
 
 export default function Sidebar() {
   const pathname = usePathname()
@@ -80,55 +107,68 @@ export default function Sidebar() {
           )}>
             {/* Main navigation items */}
             {sidebarItems.map((item) => (
-              <Button
-                key={item.name}
-                asChild
-                variant={pathname === item.href ? "secondary" : "ghost"}
-                className={cn(
-                  "justify-start",
-                  collapsed ? "h-12 w-12 p-0" : "w-full"
-                )}
-              >
-                <Link href={item.href} className={cn(
-                  "flex items-center",
-                  collapsed && "justify-center"
-                )}>
-                  <item.icon className={cn(
-                    "h-4 w-4",
-                    !collapsed && "mr-2"
-                  )} />
-                  {!collapsed && item.name}
-                </Link>
-              </Button>
-            ))}
-
-            {/* Leads & Audiences section */}
-            {!collapsed && (
-              <div className="mt-4 mb-2 px-2 text-xs font-semibold text-muted-foreground">
-                {leadsAndAudiences.title}
-              </div>
-            )}
-            {leadsAndAudiences.items.map((item) => (
-              <Button
-                key={item.name}
-                asChild
-                variant={pathname === item.href ? "secondary" : "ghost"}
-                className={cn(
-                  "justify-start",
-                  collapsed ? "h-12 w-12 p-0" : "w-full"
-                )}
-              >
-                <Link href={item.href} className={cn(
-                  "flex items-center",
-                  collapsed && "justify-center"
-                )}>
-                  <item.icon className={cn(
-                    "h-4 w-4",
-                    !collapsed && "mr-2"
-                  )} />
-                  {!collapsed && item.name}
-                </Link>
-              </Button>
+              item.items ? (
+                <DropdownMenu key={item.name}>
+                  <DropdownMenuTrigger asChild>
+                    <Button
+                      variant={pathname.startsWith('/leads') || pathname.startsWith('/audiences') ? "secondary" : "ghost"}
+                      className={cn(
+                        "w-full flex items-center",
+                        collapsed ? "h-12 w-12 p-0 justify-center" : "px-3 justify-start"
+                      )}
+                    >
+                      <item.icon className={cn(
+                        "h-4 w-4 flex-shrink-0",
+                        !collapsed && "mr-2"
+                      )} />
+                      {!collapsed && (
+                        <span className="truncate">
+                          {item.name}
+                        </span>
+                      )}
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent 
+                    side={collapsed ? "right" : "bottom"} 
+                    align={collapsed ? "start" : "center"}
+                    className={cn(
+                      "w-56",
+                      collapsed && "ml-2"
+                    )}
+                  >
+                    {item.items.map((subItem) => (
+                      <DropdownMenuItem key={subItem.name} asChild>
+                        <Link href={subItem.href} className="flex items-center w-full">
+                          <subItem.icon className="h-4 w-4 mr-2 flex-shrink-0" />
+                          <span className="truncate">{subItem.name}</span>
+                        </Link>
+                      </DropdownMenuItem>
+                    ))}
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              ) : (
+                <Button
+                  key={item.name}
+                  asChild
+                  variant={pathname.startsWith(item.href) ? "secondary" : "ghost"}
+                  className={cn(
+                    "w-full flex items-center",
+                    collapsed ? "h-12 w-12 p-0 justify-center" : "px-3 justify-start"
+                  )}
+                >
+                  <Link href={item.href}>
+                    <item.icon className={cn(
+                      "h-4 w-4 flex-shrink-0",
+                      !collapsed && "mr-2"
+                    )} />
+                    {!collapsed && (
+                      <span className="truncate">
+                        {item.name}
+                      </span>
+                    )}
+                  </Link>
+                </Button>
+              )
             ))}
           </nav>
         </div>
