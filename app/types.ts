@@ -18,6 +18,11 @@ export interface Feature {
   solution: string
 }
 
+export interface Document {
+  name: string
+  url: string
+}
+
 export interface Product {
   id: number
   name: string
@@ -27,4 +32,5 @@ export interface Product {
   proofPoints: string[]
   coachingPoints: string[]
   insights: string[]
+  documents?: Document[]
 } 

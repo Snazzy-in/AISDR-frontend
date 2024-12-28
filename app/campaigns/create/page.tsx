@@ -25,7 +25,7 @@ export default function CreateCampaignPage() {
     targeting: {},
     pitch: {},
     outreach: {},
-    workflow: {},
+    workflow: [],
     settings: {},
   })
 

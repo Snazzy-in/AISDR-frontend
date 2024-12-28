@@ -17,6 +17,11 @@ interface WorkflowStep {
   }
 }
 
+interface CampaignWorkflowProps {
+  data: WorkflowStep[]
+  onUpdate: (data: WorkflowStep[]) => void
+}
+
 interface SequenceSettings {
   autoHandleReplies: boolean
   stopOnReply: boolean
@@ -77,46 +82,19 @@ const DelayInput = ({ step, index, steps, setSteps }) => {
   );
 };
 
-export default function CampaignWorkflow() {
+export default function CampaignWorkflow({ data, onUpdate }: CampaignWorkflowProps) {
+  const [steps, setSteps] = useState<WorkflowStep[]>(data || [])
   const [settings, setSettings] = useState<SequenceSettings>({
     autoHandleReplies: true,
     stopOnReply: true,
     stopOnMeeting: true,
-    stopOnUnsubscribe: true
+    stopOnUnsubscribe: true,
   })
 
-  const [steps, setSteps] = useState<WorkflowStep[]>([
-    // Initial Email
-    {
-      id: '1',
-      type: 'email',
-      config: {}
-    },
-    // Wait 2 days
-    {
-      id: '2',
-      type: 'delay',
-      config: { delayDays: 2 }
-    },
-    // Follow-up Email 1
-    {
-      id: '3',
-      type: 'email',
-      config: {}
-    },
-    // Wait 3 days
-    {
-      id: '4',
-      type: 'delay',
-      config: { delayDays: 3 }
-    },
-    // Final Follow-up Email
-    {
-      id: '5',
-      type: 'email',
-      config: {}
-    }
-  ])
+  // Update parent component whenever steps change
+  React.useEffect(() => {
+    onUpdate(steps)
+  }, [steps, onUpdate])
 
   const addStep = (type: 'email' | 'linkedin') => {
     const newSteps = [...steps];

@@ -93,7 +93,7 @@ export default function ProductProfile({ data, onUpdate }: ProductProfileProps) 
                   if (file) {
                     const newDoc = {
                       name: file.name,
-                      // Add file upload logic here
+                      url: URL.createObjectURL(file)
                     }
                     onUpdate({ 
                       documents: [...(data.documents || []), newDoc]
